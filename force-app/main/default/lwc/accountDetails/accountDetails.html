@@ -1,0 +1,102 @@
+<template>
+<lightning-card title={formTitle} icon-name="custom">
+
+    <div class = 'slds-var-p-around_small'>
+    <lightning-combobox
+    name="parentacc"
+    label="Parent Account"
+    
+    placeholder="Select Parent Account"
+    options={parentoptions}
+    onchange={handleChange}
+    required="true"
+    message-when-value-missing="Please Selecr Parenr Account"
+    class="validateme"
+      value={selParentAcc}
+     >
+
+</lightning-combobox>
+    
+<lightning-input
+ label="Account Name"
+  placeholder="Enter the Account Name"
+  onchange={handleChange}
+    name = "accname"
+    type="text"
+    required="true"
+    message-when-value-missing="Enter Account Name"
+    message-when-too-short="Minimum Lenght of Account Name is 2"
+    class="validateme"
+    value={selAccName}
+>
+</lightning-input>
+
+
+<lightning-input
+  type="Date"
+  onchange={handleChange}
+  label="SLA Expiration Date"
+  name="slaexpdt"
+  value={selExpDate}
+>
+    
+</lightning-input>
+
+<template lwc:if={slapicklist.data} >
+<lightning-radio-group 
+  name="slatype"
+  label="SLA Type"
+  options={slapicklist.data.values}
+  type="button"
+  value={selSlaType}
+  onchange={handleChange}
+></lightning-radio-group>
+</template>
+
+
+
+<lightning-slider 
+   
+  label="Number of Locations" 
+  max="50"
+  min="1"
+ value={selnoofLocation}
+  step="1"
+  name ="nooflocations"
+  onchange={handleChange}
+ 
+
+  
+></lightning-slider>
+<lightning-input-rich-text
+    name="description"
+    label="Description"
+     onchange={handleChange}
+     value={selDesciption}
+
+></lightning-input-rich-text>
+</div>
+
+<div class="slds-var-p-around_small">
+
+    <lightning-button 
+      variant="brand"
+      label="Save" 
+      onclick={saveRecord} 
+    ></lightning-button>
+    
+
+    <template lwc:if={isDeleteAvailable}>
+    <lightning-button 
+      variant="destructive"
+      label="Delete" 
+      title="Delete"
+      onclick={deleteHandler}
+      class="slds-m-left_x-small" 
+    ></lightning-button>
+  </template>
+
+</div>
+</lightning-card>
+
+</template>
